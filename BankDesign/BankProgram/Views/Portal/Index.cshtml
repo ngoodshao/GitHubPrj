@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    var tab = null;
+    var accordion = null;
+    var tree = null;
+    var data = [];
+    function f_heightChanged(options) {
+        if (tab)
+            tab.addHeight(options.diff);
+        if (accordion && options.middleHeight - 24 > 0)
+            accordion.setHeight(options.middleHeight - 24);
+    }
+    function f_addTab(tabid, text, url) {
+        tab.addTabItem({ tabid: tabid, text: text, url: url });
+    }
+    function GetTreeData(divmen, isexpand, delay) {
+        if ($(divmen).text() == "") {
+            return;
+        }
+        var dataAll = eval("(" + $(divmen).text() + ")");
+        for (i = 0; i < dataAll.length; i++) {
+            data.push({
+                id: dataAll[i].id,
+                pid: dataAll[i].pid,
+                text: dataAll[i].text,
+                url: dataAll[i].url,
+                isexpand: dataAll[i].isexpand,
+                delay: dataAll[i].delay
+            });
+        }
+    }
+    function BindTree(treeid) {
+        //布局
+        $("#layout1").ligerLayout({ leftWidth: 190, height: '100%', heightDiff: -34, space: 4, onHeightChanged: f_heightChanged });
+        var height = $(".l-layout-center").height();
+        //Tab
+        $("#framecenter").ligerTab({
+            height: height,
+            showSwitch: true,
+            ShowSwitchInTab: true
+        });
+        //面板
+        $("#accordion1").ligerAccordion({ height: height - 24, speed: null });
+        $(".l-link").hover(function () {
+            $(this).addClass("l-link-over");
+        }, function () {
+            $(this).removeClass("l-link-over");
+        });
+
+        $(treeid).ligerTree({
+            url: '../../Models/Ajax/MyTreeDate.ashx',
+            idFieldName: 'id',
+            parentIDFieldName: 'pid',
+            iconFieldName: 'icon',
+            iconClsFieldName: 'iconClsFieldName',
+            checkbox: false,
+            slide: true,
+            onSelect: function (node) {
+                if (!node.data.url) return;
+                var tabid = $(node.target).attr("tabid");
+                if (!tabid) {
+                    tabid = new Date().getTime();
+                    $(node.target).attr("tabid", tabid)
+                }
+                f_addTab(tabid, node.data.text, node.data.url);
+            },
+        });
+
+        tab = $("#framecenter").ligerGetTabManager();
+        accordion = $("#accordion1").ligerGetAccordionManager();
+        tree = $(treeid).ligerGetTreeManager();
+        $("#pageloading").hide();
+    }
+    $(document).ready(function () {
+        //GetTreeData("#divMenu1", true, 2);
+        BindTree("#tree1");
+
+
+        $('#skinSelect').change(function () {
+            $("#mylink").attr("href", skin_links[$("#skinSelect option:selected").val()]);
+        });
+    });
+    var skin_links = {
+        "aqua": "../../lib/ligerUI/skins/Aqua/css/ligerui-all.css",
+        "gray": "../../lib/ligerUI/skins/Gray/css/all.css",
+        "silvery": "../../lib/ligerUI/skins/Silvery/css/style.css",
+        "gray2014": "../../lib/ligerUI/skins/gray2014/css/all.css",
+        "self": "../../SelfJSorCSS/css/ligerui_self_tab.css"
+    };
+
+</script>
+<style>
+    /*改变选中的窗体的标题颜色*/
+    /*#layout1 div div div ul li[class='l-selected'] a
+        {
+            color: Black;
+        }*/
+</style>
+
+<div id="topmenu" class="l-topmenu">
+    <div class="l-topmenu-logo">XXX导航主页</div>
+    <div class="l-topmenu-welcome">
+        <label> 皮肤切换：</label>
+        <select id="skinSelect">
+            <option value="aqua">默认</option>
+            <option value="silvery">Silvery</option>
+            <option value="gray">Gray</option>
+            <option value="gray2014">Gray2014</option>
+            <option value="self">自定义</option>
+        </select>
+        <a href="#" class="l-link2">XX1</a>
+        <span class="space">|</span>
+        <a href="#" class="l-link2" target="_blank">XX2</a>
+        <span class="space">|</span>
+        <a href="#" class="l-link2" target="_blank">XX3</a>
+    </div>
+</div>
+<div id="layout1" style="width: 100%; margin: 0 auto; margin-top: 1px;">
+    <div position="left" title="我的工作台" id="accordion1" style="overflow-y: auto">
+        <ul id="tree1" style="/*margin-top: 3px; */">
+    </div>
+    <div position="center" id="framecenter">
+        <div id="divHome" tabid="HomePage" title="主页" style="height: 300px; color: black;" showclose="true">
+            <iframe frameborder="0" name="home" id="home" src="MUser/Query"></iframe>
+        </div>
+    </div>
+</div>
+

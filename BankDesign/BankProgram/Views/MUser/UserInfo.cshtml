@@ -1,0 +1,119 @@
+﻿@model LSH.EF.CodeFirst.DLL.Model.M_User
+
+<script>
+    function closeW() {
+        var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+        dialog.close();
+    }
+    function TClose() {
+        var succ = "@ViewBag.Succ";
+        var msg = "@ViewBag.Msg";
+        if (msg != "") {
+            if (succ == "1") {
+                $.ligerDialog.alert(msg, '提示', "success", function () {
+                    //alert(window.parent.document.location);//父页
+                    //alert(window.parent.location);//父页
+                    //alert(window.location);//当前页
+                    window.parent.document.location.reload();
+                    //window.parent.document.ligerGrid.loadData();
+                    closeW();
+                });
+            }
+            else {
+                $.ligerDialog.alert(msg, '提示', "error");
+            }
+        }
+    }
+    TClose();
+
+    function itemclick(item) {
+        if (item.ActionName == "Close") {
+            closeW();
+        }
+        if (item.ActionName == "Save") {
+            $('#form1').submit();
+        }
+    }
+    $(function () {
+        $("#toptoolbar").ligerToolBar({
+            items: [
+                {
+                    text: '保存', click: itemclick, icon: 'save', ActionName: 'Save'
+                },
+                { line: true },
+                { text: '关闭', click: itemclick, icon: 'close', ActionName: 'Close' },
+            ]
+        });
+    });
+
+</script>
+<style>
+    input, select {
+        padding-left: 3px;
+        margin-bottom: 5px;
+        min-height: 30px;
+        width: 86%;
+    }
+</style>
+
+<div id="toptoolbar"></div>
+<br />
+<div class="container">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="row">
+        <div class="col-xs-2 text-right">
+            @Html.LabelFor(model => model.UserID, new { @class = " control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.EditorFor(model => model.UserID)
+            @Html.ValidationMessageFor(model => model.UserID)
+        </div>
+
+        <div class="col-xs-2  text-right">
+            @Html.LabelFor(model => model.UserPwd, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.PasswordFor(model => model.UserPwd)
+            @Html.ValidationMessageFor(model => model.UserPwd)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2  text-right">
+            @Html.LabelFor(model => model.UserName, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="col-xs-2  text-right">
+            @Html.LabelFor(model => model.UserPermission, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.DropDownListFor(model => model.UserPermission, new[] {
+               new SelectListItem(){ Text="添加", Value="0"},
+               new SelectListItem(){ Text="删除", Value="1"}, 
+               new SelectListItem(){ Text="修改", Value="2"},
+               new SelectListItem(){ Text="查询", Value="3"}}, "请选择", new { multiple = "multiple" })
+            @Html.ValidationMessageFor(model => model.UserPermission)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2  text-right">
+            @Html.LabelFor(model => model.UserState, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.DropDownListFor(model => model.UserState, new[] {
+               new SelectListItem(){ Text="活动", Value="1"},
+               new SelectListItem(){ Text="禁用", Value="2"}}, "请选择")
+            @Html.ValidationMessageFor(model => model.UserState)
+        </div>
+        <div class="col-xs-2 text-right">
+            @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            @Html.EditorFor(model => model.Remark);
+        </div>
+    </div>
+</div>

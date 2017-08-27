@@ -1,0 +1,87 @@
+﻿@using BankProgram.HtmlHelpers;
+@{
+    ViewBag.Title = "Query";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/SelfJSorCSS/js/PMS_Grid.js"></script>
+<script src="~/SelfJSorCSS/js/CommFunJS.js"></script>
+<script src="~/Models/Ajax/TBHeader/MUser_Header.js"></script>
+<script type="text/javascript">
+
+    var ligerManager;
+    $(function () {
+        //来自于js文件中，这样利于以后维护
+        var columns = MUserColumns;//GetColumns();
+        //查询数据的url
+        var url = "../Models/Ajax/Master/M_User_Body.ashx";
+        //生成grid
+        ligerManager = $.ligerGridTableCreate("pageloading", "maingrid4", columns, url);
+    });
+
+    //按钮组
+    function itemclick(item) {
+        //alert("ssss");
+        controllerName = "MUser";
+        dataId = "fUserID";
+        var a = ligerManager.getSelected();
+        if (item.ActionName == "Add") {
+            $.fn_open("/" + controllerName + "/Add", item.ActionName);
+        }
+        else if (item.ActionName == "Import") {
+            $.fn_open("/" + controllerName + "/Import", item.ActionName);
+        }
+        else if (item.ActionName == "Export") {
+            //获取条件
+            var f = "";
+            if (ligerManager.options.parms.length != 0)
+            {
+                f = ligerManager.options.parms[0].value;
+            }
+            //将条件写入隐藏域
+            $("#parWhere").val(f);
+            //提交表单
+            $('#form1').submit();
+        }
+        else if (item.ActionName == "Delete") {
+
+            if (a != null) {
+                var aR = $.ligerDialog.confirm('确定要删除吗', function (aR) {
+                    if (aR) {
+                        var userids = [];
+                        ligerManager.selected.forEach(function (value, index, array) {
+                            userids.push(value[dataId]);
+                        });
+
+                        var uids = ligerManager.selected.forEach(function (value, index, array) {
+                            return value[dataId];
+                        });
+                        $.fn_Delete(userids, '@Url.Action("Delete", "MUser")');
+                    }
+                });
+            }
+        }
+        else {
+            var rSelected = ligerManager.getSelecteds();
+            if (rSelected.length < 2) {
+                if (a != null) {
+                    $.fn_open("/" + controllerName + "/" + item.ActionName + "/?userid=" + a[dataId], item.ActionName);
+                }
+            }
+            else {
+                $.ligerDialog.question('不能编辑多行!');
+            }
+        }
+    }
+
+</script>
+
+@Html.GridFor("pageloading", "maingrid4");
+
+<!-- 路由可以转参数-->
+@using (Html.BeginForm("Export", "MUser", new { id = "abcde", ids = "abc", wheres = "ddd" }, FormMethod.Post, new { id = "form1" }))
+{
+    <!-- 将要转的参数放在隐藏域中-->
+    <input type="hidden" value="" id="parWhere" name="where" />
+}
+
