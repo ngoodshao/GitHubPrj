@@ -44,7 +44,30 @@
                 { text: '关闭', click: itemclick, icon: 'close', ActionName: 'Close' },
             ]
         });
+        SetSelected();
     });
+
+    function GetSelected(e) {
+        var perssiom = "";
+        alert($("#" + e.id));
+        var checkPin = $("#" + e.id).parent().parent().children("label").children("input[onclick='GetSelected(this)']");
+        checkPin.each(function () {
+            if ($(this).is(':checked'))
+                perssiom += $(this).attr("value") + ",";
+        });
+        $("#UserPermission").val(perssiom);
+    }
+
+    function SetSelected() {
+        var sperssiom = $("#UserPermission").val().split(',');
+
+        var checkPin = $("#checkDel").parent().parent().children("label").children("input[onclick='GetSelected(this)']")
+
+        for (var i = 0; i < sperssiom.length; i++)
+        {
+            $("#checkDel").parent().parent().children("label").children("input[value='" + sperssiom[i] + "']").attr("checked", "checked")
+        }
+    }
 
 </script>
 <style>
@@ -88,19 +111,6 @@
         </div>
 
         <div class="col-xs-2  text-right">
-            @Html.LabelFor(model => model.UserPermission, new { @class = "control-label" })
-        </div>
-        <div class="col-xs-4">
-            @Html.DropDownListFor(model => model.UserPermission, new[] {
-               new SelectListItem(){ Text="添加", Value="0"},
-               new SelectListItem(){ Text="删除", Value="1"}, 
-               new SelectListItem(){ Text="修改", Value="2"},
-               new SelectListItem(){ Text="查询", Value="3"}}, "请选择", new { multiple = "multiple" })
-            @Html.ValidationMessageFor(model => model.UserPermission)
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-2  text-right">
             @Html.LabelFor(model => model.UserState, new { @class = "control-label" })
         </div>
         <div class="col-xs-4">
@@ -109,11 +119,28 @@
                new SelectListItem(){ Text="禁用", Value="2"}}, "请选择")
             @Html.ValidationMessageFor(model => model.UserState)
         </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-2  text-right">
+            @Html.LabelFor(model => model.UserPermission, new { @class = "control-label" })
+        </div>
+        <div class="col-xs-4">
+            <label>@Html.CheckBox("checkAdd", false, new { onclick = "GetSelected(this)",value="0" }) 添加</label>
+            <label>@Html.CheckBox("checkDel", false, new { onclick = "GetSelected(this)", value = "1" }) 删除</label>
+            <label>@Html.CheckBox("checkModify", false, new { onclick = "GetSelected(this)", value = "2" }) 修改</label>
+            <label>@Html.CheckBox("checkQuery", false, new { onclick = "GetSelected(this)", value = "3" }) 查询</label>
+            <label>@Html.CheckBox("checkImport", false, new { onclick = "GetSelected(this)", value = "4" }) 导入</label>
+            <label>@Html.CheckBox("checkExport", false, new { onclick = "GetSelected(this)", value = "5" }) 导出</label>
+            @Html.HiddenFor(model => model.UserPermission)
+            @Html.ValidationMessageFor(model => model.UserPermission)
+        </div>
+
         <div class="col-xs-2 text-right">
             @Html.LabelFor(model => model.Remark, new { @class = "control-label" })
         </div>
         <div class="col-xs-4">
-            @Html.EditorFor(model => model.Remark);
+            @Html.TextAreaFor(model => model.Remark)
         </div>
     </div>
 </div>

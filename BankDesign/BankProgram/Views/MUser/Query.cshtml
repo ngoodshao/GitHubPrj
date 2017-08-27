@@ -6,7 +6,7 @@
 
 <script src="~/SelfJSorCSS/js/PMS_Grid.js"></script>
 <script src="~/SelfJSorCSS/js/CommFunJS.js"></script>
-<script src="~/Models/Ajax/TBHeader/MUser_Header.js"></script>
+<script src="~/Models/Ajax/TBHeader/MUser_Header.js?v=1"></script>
 <script type="text/javascript">
 
     var ligerManager;
@@ -23,7 +23,7 @@
     function itemclick(item) {
         //alert("ssss");
         controllerName = "MUser";
-        dataId = "fUserID";
+        dataId = "UserID";
         var a = ligerManager.getSelected();
         if (item.ActionName == "Add") {
             $.fn_open("/" + controllerName + "/Add", item.ActionName);
@@ -53,10 +53,15 @@
                             userids.push(value[dataId]);
                         });
 
-                        var uids = ligerManager.selected.forEach(function (value, index, array) {
-                            return value[dataId];
-                        });
-                        $.fn_Delete(userids, '@Url.Action("Delete", "MUser")');
+                        //var uids = ligerManager.selected.forEach(function (value, index, array) {
+                        //    return value[dataId];
+                        //});
+                        
+                        //将条件写入隐藏域
+                        $("#userids").val(userids.join(","));
+                        //提交表单
+                        $('#form2').submit();
+                        //$.fn_Delete(userids, '@Url.Action("Delete", "MUser")');
                     }
                 });
             }
@@ -83,5 +88,10 @@
 {
     <!-- 将要转的参数放在隐藏域中-->
     <input type="hidden" value="" id="parWhere" name="where" />
+}
+@using (Html.BeginForm("Delete", "MUser", FormMethod.Post, new { id = "form2" }))
+{
+    <!-- 将要转的参数放在隐藏域中-->
+    <input type="hidden" value="" id="userids" name="userids" />
 }
 

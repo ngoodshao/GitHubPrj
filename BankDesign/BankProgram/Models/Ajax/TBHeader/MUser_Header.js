@@ -16,6 +16,10 @@
                                 str += '修改' + ",";
                             if (parseInt(perm[i]) == 3)
                                 str += '查询' + ",";
+                            if (parseInt(perm[i]) == 4)
+                                str += '导入' + ",";
+                            if (parseInt(perm[i]) == 5)
+                                str += '导出' + ",";
                         }
                         return str.substr(0, str.length - 1);
                     }
@@ -23,8 +27,8 @@
                 {
                     display: '用户状态', name: 'UserState',
                     render: function (item) {
-                        if (parseInt(item.fDelFlag) == 1)
-                            return '激活';
+                        if (parseInt(item.UserState) == 1)
+                            return '活动';
                         return '禁用';
                     }
                 }

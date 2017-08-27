@@ -26,6 +26,19 @@ namespace LSH.EF.CodeFirst.DLL.DBSet
             }
         }
 
+        public bool Add(List<M_User> lstUser)
+        {
+            using (DBHelperContext dbcon = new DBHelperContext())
+            {
+                foreach (var m in lstUser)
+                {
+                    dbcon.M_Users.Add(m);
+                }
+                int i = dbcon.SaveChanges();
+                return i > 0 ? true : false;
+            }
+        }
+
         public bool Remove(List<string> keys)
         {
             using (DBHelperContext dbcon = new DBHelperContext())
@@ -50,7 +63,8 @@ namespace LSH.EF.CodeFirst.DLL.DBSet
                 List<MemberInfo> lstM = t.GetType().GetMembers().ToList();
                 foreach (MemberInfo m in lstM)
                 {
-                    modifyEntity.Property(m.Name).IsModified = true;
+                    if(m.MemberType==MemberTypes.Property)
+                        modifyEntity.Property(m.Name).IsModified = true;
                 }
                 int i = dbcon.SaveChanges();
                 return i > 0 ? true : false;
@@ -119,5 +133,13 @@ namespace LSH.EF.CodeFirst.DLL.DBSet
             }
         }
 
+        public M_User Query(string userid)
+        {
+            using (DBHelperContext dbcon = new DBHelperContext())
+            {
+                var muser = dbcon.M_Users.Find(userid);
+                return muser;
+            }
+        }
     }
 }

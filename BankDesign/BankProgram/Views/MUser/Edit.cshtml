@@ -1,0 +1,12 @@
+﻿@model LSH.EF.CodeFirst.DLL.Model.M_User
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Edit", "MUser", null, FormMethod.Post, new { id = "form1" }))
+{
+    @Html.Partial("UserInfo", Model);
+}

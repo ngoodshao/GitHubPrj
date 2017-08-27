@@ -9,7 +9,7 @@ namespace BankProgram.Models
 {
     public class SQLDBHelperClient
     {
-        public static M_User_DB Create()
+        public static M_User_DB CreateUser()
         {
             return SQLDBHelper.CreateDBClass<M_User_DB>();
         }

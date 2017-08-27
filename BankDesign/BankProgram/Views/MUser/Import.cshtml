@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function closeW() {
+        var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+        dialog.close();
+    }
+    function TClose() {
+        var succ = "@ViewBag.Succ";
+        var msg = "@ViewBag.Msg";
+        if (msg != "")
+        {
+            if(succ == "1")
+            {
+                $.ligerDialog.alert(msg, '提示', "success", function () {
+                    //alert(window.parent.document.location);//父页
+                    //alert(window.parent.location);//父页
+                    //alert(window.location);//当前页
+                    window.parent.document.location.reload();
+                    //window.parent.document.ligerGrid.loadData();
+                    closeW();
+                });
+            }
+            else
+            {
+                $.ligerDialog.alert(msg, '提示', "error");
+            }
+        }
+    }
+    TClose();
+
+    function itemclick(item) {
+        if(item.ActionName=="Close")
+        {
+            closeW();
+        }
+        if(item.ActionName=="Save")
+        {
+            $('#form1').submit();
+        }
+    }
+    $(function () {
+        $("#toptoolbar").ligerToolBar({
+            items: [
+                {
+                    text: '保存', click: itemclick, icon: 'save', ActionName: 'Save'
+                },
+                { line: true },
+                { text: '关闭', click: itemclick,icon:'close',ActionName:'Close' },
+            ]
+        });
+    });
+
+</script>
+<style>
+    input, select {
+        padding-left: 3px;
+        margin-bottom: 5px;
+        min-height: 30px;
+        width: 86%;
+    }
+</style>
+@using (Html.BeginForm("Import", "MUser", null, FormMethod.Post, new { id = "form1", enctype = "multipart/form-data" }))
+{
+    <div id="toptoolbar"></div>
+    @Html.TextBox("abc", "", "", new { type = "file" })
+}

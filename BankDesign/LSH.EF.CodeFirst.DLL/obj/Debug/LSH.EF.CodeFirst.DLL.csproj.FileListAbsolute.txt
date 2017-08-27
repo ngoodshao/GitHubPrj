@@ -7,3 +7,12 @@ D:\WORK\Project\Bank\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.x
 D:\WORK\Project\Bank\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.SqlServer.xml
 D:\WORK\Project\Bank\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.dll
 D:\WORK\Project\Bank\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.pdb
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\LSH.EF.CodeFirst.DLL.dll.config
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\LSH.EF.CodeFirst.DLL.dll
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\LSH.EF.CodeFirst.DLL.pdb
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.dll
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.SqlServer.dll
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.xml
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.SqlServer.xml
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.dll
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.pdb
