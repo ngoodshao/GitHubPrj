@@ -29,14 +29,12 @@ namespace BankProgram.Controllers
         [HttpPost]
         public ActionResult Add(M_User muser)
         {
-            //return RedirectToAction("Edit", muser);
             bool iTrue = SQLDBHelperClient.CreateUser().Add(muser);
             if (iTrue )
             {
                 ViewBag.Succ = "1";
                 ViewBag.Msg = "数据添加成功!";
                 return View(new M_User());
-                //return RedirectToAction("ListPageLigerUI");
             }
             else
             {
@@ -49,33 +47,35 @@ namespace BankProgram.Controllers
         [HttpGet]
         public ActionResult Add()
         {
+            ViewBag.AState = "ADD";
             return View();
         }
         #endregion
 
         #region Delete
         [HttpPost]
-        public JsonResult Delete(string userid)
+        public ActionResult Delete(string userid)
         {
-            bool iSucc=false;
+            bool iSucc = false;
             //if (string.IsNullOrEmpty(userid))
             //{
-                if (Request.Params["userids"] != null)
-                {
-                    string[] strUserid = Request.Params["userids"].Split(',');
-                    iSucc = SQLDBHelperClient.CreateUser().Remove(Request.Params["userids"].Split(',').ToList());
-                }
+            if (Request.Params["userids"] != null)
+            {
+                string[] strUserid = Request.Params["userids"].Split(',');
+                iSucc = SQLDBHelperClient.CreateUser().Remove(Request.Params["userids"].Split(',').ToList());
+            }
             //}
-
-            //M_User[] lstUsers = db.QueryUser("");
-            //return RedirectToAction("ListPageLigerUI");
-            Dictionary<string, string> dic = new Dictionary<string, string>();
-            dic.Add("result", iSucc ? "1" : "0");
-            dic.Add("errMsg", iSucc ? "数据删除成功!" : "数据删除失败!");
-
-            var res = new JsonResult();
-            res.Data = dic;
-            return res;// new JavaScriptSerializer().Serialize(dic);
+            if (iSucc)
+            {
+                ViewBag.Succ = "1";
+                ViewBag.Msg = "数据删除成功!";
+            }
+            else
+            {
+                ViewBag.Succ = "0";
+                ViewBag.Msg = "数据删除失败!";
+            }
+            return View("Query");
         }
         #endregion
 
@@ -88,6 +88,7 @@ namespace BankProgram.Controllers
                 SQLDBHelperClient.CreateUser().Update(muser);
                 ViewBag.Succ = "1";
                 ViewBag.Msg = "数据编辑成功!";
+                //return View("Query");
                 return View("Edit");
             }
             else
@@ -102,6 +103,7 @@ namespace BankProgram.Controllers
         [HttpGet]
         public ActionResult Edit(string userid)
         {
+            ViewBag.AState = "EDIT";
             M_User User = SQLDBHelperClient.CreateUser().Query(userid);
             return View("Edit", User);
         }
@@ -125,7 +127,6 @@ namespace BankProgram.Controllers
                     ViewBag.Succ = "1";
                     ViewBag.Msg = "数据添加成功!";
                     return View();
-                    //return RedirectToAction("ListPageLigerUI");
                 }
                 else
                 {
@@ -137,7 +138,7 @@ namespace BankProgram.Controllers
             catch (Exception ex)
             {
                 ViewBag.Succ = "0";
-                ViewBag.Msg = "数据添加失败!";// +ex.Message;
+                ViewBag.Msg = "数据添加失败!";
                 return View();
             }
         }

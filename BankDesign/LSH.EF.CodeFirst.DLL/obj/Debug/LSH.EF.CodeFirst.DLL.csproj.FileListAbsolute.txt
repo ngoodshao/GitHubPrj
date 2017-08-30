@@ -16,3 +16,4 @@ D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\Entit
 D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\bin\Debug\EntityFramework.SqlServer.xml
 D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.dll
 D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.pdb
+D:\WORK\Project\GitHub\GitHubPrj\BankDesign\LSH.EF.CodeFirst.DLL\obj\Debug\LSH.EF.CodeFirst.DLL.csprojResolveAssemblyReference.cache

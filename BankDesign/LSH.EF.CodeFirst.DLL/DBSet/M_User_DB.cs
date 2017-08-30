@@ -63,7 +63,7 @@ namespace LSH.EF.CodeFirst.DLL.DBSet
                 List<MemberInfo> lstM = t.GetType().GetMembers().ToList();
                 foreach (MemberInfo m in lstM)
                 {
-                    if(m.MemberType==MemberTypes.Property)
+                    if (m.MemberType == MemberTypes.Property)
                         modifyEntity.Property(m.Name).IsModified = true;
                 }
                 int i = dbcon.SaveChanges();

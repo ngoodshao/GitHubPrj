@@ -11,11 +11,7 @@
         if (msg != "") {
             if (succ == "1") {
                 $.ligerDialog.alert(msg, '提示', "success", function () {
-                    //alert(window.parent.document.location);//父页
-                    //alert(window.parent.location);//父页
-                    //alert(window.location);//当前页
                     window.parent.document.location.reload();
-                    //window.parent.document.ligerGrid.loadData();
                     closeW();
                 });
             }
@@ -45,11 +41,12 @@
             ]
         });
         SetSelected();
+        SetUserID();
     });
-
+    //获取状态选中的项
     function GetSelected(e) {
         var perssiom = "";
-        alert($("#" + e.id));
+        //alert($("#" + e.id));
         var checkPin = $("#" + e.id).parent().parent().children("label").children("input[onclick='GetSelected(this)']");
         checkPin.each(function () {
             if ($(this).is(':checked'))
@@ -57,7 +54,7 @@
         });
         $("#UserPermission").val(perssiom);
     }
-
+    //根据数据设定状态选中
     function SetSelected() {
         var sperssiom = $("#UserPermission").val().split(',');
 
@@ -69,6 +66,13 @@
         }
     }
 
+    function SetUserID() {
+        var AState = "@ViewBag.AState";
+        if (AState != "" && AState == "EDIT") {
+            $("#UserID").attr("disabled", "disabled");
+        }
+    }
+     
 </script>
 <style>
     input, select {
@@ -90,9 +94,11 @@
         </div>
         <div class="col-xs-4">
             @Html.EditorFor(model => model.UserID)
+            @Html.HiddenFor(model => model.UserID)
             @Html.ValidationMessageFor(model => model.UserID)
         </div>
-
+        @if (ViewBag.AState != "EDIT")
+        { 
         <div class="col-xs-2  text-right">
             @Html.LabelFor(model => model.UserPwd, new { @class = "control-label" })
         </div>
@@ -100,6 +106,12 @@
             @Html.PasswordFor(model => model.UserPwd)
             @Html.ValidationMessageFor(model => model.UserPwd)
         </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.UserPwd)
+        }
+
     </div>
     <div class="row">
         <div class="col-xs-2  text-right">

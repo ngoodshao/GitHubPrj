@@ -19,6 +19,27 @@
         ligerManager = $.ligerGridTableCreate("pageloading", "maingrid4", columns, url);
     });
 
+    function TClose() {
+        var succ = "@ViewBag.Succ";
+        var msg = "@ViewBag.Msg";
+        if (msg != "") {
+            if (succ == "1") {
+                $.ligerDialog.alert(msg, '提示', "success", function () {
+                    //alert(window.parent.document.location);//父页
+                    //alert(window.parent.location);//父页
+                    //alert(window.location);//当前页
+                    window.parent.document.location.reload();
+                    //window.parent.document.ligerGrid.loadData();
+                    closeW();
+                });
+            }
+            else {
+                $.ligerDialog.alert(msg, '提示', "error");
+            }
+        }
+    }
+    TClose();
+
     //按钮组
     function itemclick(item) {
         //alert("ssss");
