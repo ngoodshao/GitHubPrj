@@ -15,6 +15,7 @@
                 pageSize: 20,
                 width: '98%', height: '98%', checkbox: true, rownumbers: true,
                 dataAction: "server",
+                async:true,
                 fixedCellHeight: false,
                 //onSelectRow: function (rowdata, rowid, rowobj) {
 
