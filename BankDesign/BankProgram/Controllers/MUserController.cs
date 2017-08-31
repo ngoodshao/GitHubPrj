@@ -29,6 +29,7 @@ namespace BankProgram.Controllers
         [HttpPost]
         public ActionResult Add(M_User muser)
         {
+            muser.AddOrUpdateUserID = "";
             bool iTrue = SQLDBHelperClient.CreateUser().Add(muser);
             if (iTrue )
             {

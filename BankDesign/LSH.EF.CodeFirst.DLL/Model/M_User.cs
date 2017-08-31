@@ -39,5 +39,19 @@ namespace LSH.EF.CodeFirst.DLL.Model
         /// </summary>
         [Display(Name = "备注")]
         public string Remark { get; set; }
+
+        public string AddOrUpdateUserID { get; set; }
+
+        private DateTime _AddOrUpdateDate = DateTime.Now;
+        public DateTime AddOrUpdateDate
+        {
+            set {
+                _AddOrUpdateDate = value;
+            }
+            get
+            {
+                return _AddOrUpdateDate;
+            }
+        }
     }
 }
