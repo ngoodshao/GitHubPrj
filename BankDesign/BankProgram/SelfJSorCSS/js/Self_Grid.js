@@ -1,13 +1,13 @@
 ﻿
 
-;(function($){
+; (function ($) {
     var ligerGridEvent = {
         ControllerName: "",
         dataId: "",
     };
 
     $.extend({
-        ligerGridTableCreate: function(pageloadid, gridid, cols, url) {
+        ligerGridTableCreate: function (pageloadid, gridid, cols, url) {
             var ligerManager = $("#" + gridid).ligerGrid({
                 columns: cols,
                 url: url,
@@ -15,7 +15,7 @@
                 pageSize: 20,
                 width: '98%', height: '98%', checkbox: true, rownumbers: true,
                 dataAction: "server",
-                async:true,
+                async: true,
                 fixedCellHeight: false,
                 //onSelectRow: function (rowdata, rowid, rowobj) {
 

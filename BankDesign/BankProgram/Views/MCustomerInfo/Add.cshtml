@@ -1,0 +1,10 @@
+﻿@model LSH.EF.CodeFirst.DLL.Model.M_CustomerInfo
+
+@{
+    ViewBag.Title = "Add";
+}
+
+@using (Html.BeginForm("Add", "MCustomerInfo", null, FormMethod.Post, new { id = "form1" }))
+{
+    @Html.Partial("CustomerInfoPartial", Model);
+}

@@ -6,7 +6,7 @@
 
 <script src="~/SelfJSorCSS/js/Self_Grid.js?v=1"></script>
 <script src="~/SelfJSorCSS/js/CommFunJS.js"></script>
-<script src="~/Models/Ajax/TBHeader/MUser_Header.js?v=1"></script>
+<script src="~/Models/Ajax/TBHeader/MCustomerInfo_Header.js?v=2"></script>
 <script type="text/javascript">
 
     var ligerManager;
@@ -14,7 +14,7 @@
         //来自于js文件中，这样利于以后维护
         var columns = MUserColumns;//GetColumns();
         //查询数据的url
-        var url = "../Models/Ajax/Master/M_User_Body.ashx";
+        var url = "../Models/Ajax/Master/M_CustomerInfo_Body.ashx";
         //生成grid
         ligerManager = $.ligerGridTableCreate("pageloading", "maingrid4", columns, url);
     });
@@ -43,8 +43,8 @@
     //按钮组
     function itemclick(item) {
         //alert("ssss");
-        controllerName = "MUser";
-        dataId = "UserID";
+        controllerName = "MCustomerInfo";
+        dataId = "CusCode";
         var a = ligerManager.getSelected();
         if (item.ActionName == "Add") {
             $.fn_open("/" + controllerName + "/Add", item.ActionName);
@@ -77,12 +77,11 @@
                         //var uids = ligerManager.selected.forEach(function (value, index, array) {
                         //    return value[dataId];
                         //});
-                        
+
                         //将条件写入隐藏域
-                        $("#userids").val(userids.join(","));
+                        $("#keys").val(userids.join(","));
                         //提交表单
                         $('#form2').submit();
-                        //$.fn_Delete(userids, '@Url.Action("Delete", "MUser")');
                     }
                 });
             }
@@ -91,7 +90,7 @@
             var rSelected = ligerManager.getSelecteds();
             if (rSelected.length < 2) {
                 if (a != null) {
-                    $.fn_open("/" + controllerName + "/" + item.ActionName + "/?userid=" + a[dataId], item.ActionName);
+                    $.fn_open("/" + controllerName + "/" + item.ActionName + "/?key=" + a[dataId], item.ActionName);
                 }
             }
             else {
@@ -105,14 +104,14 @@
 @Html.GridFor("pageloading", "maingrid4");
 
 <!-- 路由可以转参数-->
-@using (Html.BeginForm("Export", "MUser", new { id = "abcde", ids = "abc", wheres = "ddd" }, FormMethod.Post, new { id = "form1" }))
+@using (Html.BeginForm("Export", "MCustomerInfo", new { id = "abcde", ids = "abc", wheres = "ddd" }, FormMethod.Post, new { id = "form1" }))
 {
     <!-- 将要转的参数放在隐藏域中-->
     <input type="hidden" value="" id="parWhere" name="where" />
 }
-@using (Html.BeginForm("Delete", "MUser", FormMethod.Post, new { id = "form2" }))
+@using (Html.BeginForm("Delete", "MCustomerInfo", FormMethod.Post, new { id = "form2" }))
 {
     <!-- 将要转的参数放在隐藏域中-->
-    <input type="hidden" value="" id="userids" name="userids" />
+    <input type="hidden" value="" id="keys" name="keys" />
 }
 

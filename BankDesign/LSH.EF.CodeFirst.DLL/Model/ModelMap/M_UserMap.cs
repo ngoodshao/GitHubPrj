@@ -17,8 +17,8 @@ namespace LSH.EF.CodeFirst.DLL.Model.ModelMap
             Property(p => p.UserPermission).HasMaxLength(20).IsRequired();
             Property(p => p.UserPwd).HasMaxLength(20).IsRequired();
             Property(p => p.UserState).IsRequired();
-            Property(p => p.Remark).HasMaxLength(2000).IsOptional();
             Property(p => p.AddOrUpdateUserID).HasMaxLength(20).IsOptional();
+            Property(p => p.Remark).HasMaxLength(2000).IsOptional();
         }
     }
 }

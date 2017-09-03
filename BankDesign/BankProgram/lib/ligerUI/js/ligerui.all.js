@@ -7045,8 +7045,8 @@
     };
 
     $.ligerDefaults.Filter.operators['string'] =
-    $.ligerDefaults.Filter.operators['text'] =
-    ["equal", "notequal", "startwith", "endwith", "like", "greater", "greaterorequal", "less", "lessorequal", "in", "notin"];
+    $.ligerDefaults.Filter.operators['text'] = ["like"]
+    //["equal", "notequal", "startwith", "endwith", "like", "greater", "greaterorequal", "less", "lessorequal", "in", "notin"];
 
     $.ligerDefaults.Filter.operators['number'] =
     $.ligerDefaults.Filter.operators['int'] =

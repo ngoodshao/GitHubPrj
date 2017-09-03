@@ -31,5 +31,6 @@
                             return '活动';
                         return '禁用';
                     }
-                }
+                },
+                { display: '备注', name: 'Remark' },
 ]

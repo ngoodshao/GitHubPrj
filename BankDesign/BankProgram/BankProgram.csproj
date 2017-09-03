@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\MPermissionController.cs" />
     <Compile Include="Controllers\MUserController.cs" />
+    <Compile Include="Controllers\MCustomerInfoController.cs" />
     <Compile Include="Controllers\PortalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +193,9 @@
     <Compile Include="Infrastructure\PageInfo.cs" />
     <Compile Include="Infrastructure\QueryFilter.cs" />
     <Compile Include="Infrastructure\TableHeader.cs" />
+    <Compile Include="Models\Ajax\Master\M_CustomerInfo_Body.ashx.cs">
+      <DependentUpon>M_CustomerInfo_Body.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ajax\Master\M_User_Body.ashx.cs">
       <DependentUpon>M_User_Body.ashx</DependentUpon>
     </Compile>
@@ -656,10 +660,12 @@
     <Content Include="lib\ligerUI\skins\Tab\images\win\dialogbtn.gif" />
     <Content Include="lib\ligerUI\skins\Tab\images\win\dialogicon.gif" />
     <Content Include="Models\Ajax\TBHeader\MUser_Header.js" />
+    <Content Include="Models\Ajax\TBHeader\MCustomerInfo_Header.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Models\Ajax\MyTreeDate.ashx" />
     <Content Include="Models\Ajax\Master\M_User_Body.ashx" />
+    <Content Include="Models\Ajax\Master\M_CustomerInfo_Body.ashx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -698,9 +704,13 @@
     <Content Include="Views\Portal\Index.cshtml" />
     <Content Include="Views\MUser\Query.cshtml" />
     <Content Include="Views\MUser\Add.cshtml" />
-    <Content Include="Views\MUser\UserInfo.cshtml" />
+    <Content Include="Views\MUser\UserInfoPartial.cshtml" />
     <Content Include="Views\MUser\Edit.cshtml" />
     <Content Include="Views\MUser\Import.cshtml" />
+    <Content Include="Views\MCustomerInfo\Query.cshtml" />
+    <Content Include="Views\MCustomerInfo\Add.cshtml" />
+    <Content Include="Views\MCustomerInfo\CustomerInfoPartial.cshtml" />
+    <Content Include="Views\MCustomerInfo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

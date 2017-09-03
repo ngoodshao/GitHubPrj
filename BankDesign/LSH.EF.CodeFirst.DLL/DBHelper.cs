@@ -20,6 +20,12 @@ namespace LSH.EF.CodeFirst.DLL
         /// <returns></returns>
         bool Add(T t);
         /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="lstT"></param>
+        /// <returns></returns>
+        bool Add(List<T> lstT);
+        /// <summary>
         /// 删除
         /// </summary>
         /// <param name="keys"></param>
@@ -39,6 +45,12 @@ namespace LSH.EF.CodeFirst.DLL
         /// <param name="iEIndex"></param>
         /// <returns></returns>
         M_Data_Paging<T> Query(WhereFilter wherefilter, int iSIndex, int iEIndex);
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        T Query(string key);
     }
     public class DBCreate
     {
@@ -63,11 +75,13 @@ namespace LSH.EF.CodeFirst.DLL
         }
 
         public DbSet<M_User> M_Users { get; set; }
+        public DbSet<M_CustomerInfo> M_CustomerInfos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //base.OnModelCreating(modelBuilder);
             modelBuilder.Configurations.Add(new M_UserMap());
+            modelBuilder.Configurations.Add(new M_CustomerInfoMap());
         }
     }
     /// <summary>

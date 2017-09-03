@@ -63,9 +63,9 @@ namespace BankProgram.Models.Ajax
             {
                 id = 11,
                 pid = 1,
-                text = "班时间管理",
+                text = "客户管理",
                 isLeaf = false,
-                url = "/MShiftTime/Query",
+                url = "/MCustomerInfo/Query",
                 isexpand = false,
                 delay = 2,
                 iconClsFieldName = "bookpen"

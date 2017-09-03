@@ -13,5 +13,11 @@ namespace BankProgram.Models
         {
             return SQLDBHelper.CreateDBClass<M_User_DB>();
         }
+
+        public static M_CustomerInfo_DB CreateCus()
+        {
+            return SQLDBHelper.CreateDBClass<M_CustomerInfo_DB>();
+        }
     }
+
 }

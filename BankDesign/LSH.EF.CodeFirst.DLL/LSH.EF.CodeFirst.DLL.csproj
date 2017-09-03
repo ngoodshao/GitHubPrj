@@ -48,8 +48,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBHelper.cs" />
+    <Compile Include="DBSet\M_CustomerInfo_DB.cs" />
+    <Compile Include="Model\ModelMap\M_CustomerInfoMap.cs" />
     <Compile Include="Model\ModelMap\M_PermissionMap.cs" />
     <Compile Include="Model\ModelMap\M_UserMap.cs" />
+    <Compile Include="Model\M_CustomerInfo.cs" />
     <Compile Include="Model\M_Permission.cs" />
     <Compile Include="Model\M_User.cs" />
     <Compile Include="DBSet\M_User_DB.cs" />

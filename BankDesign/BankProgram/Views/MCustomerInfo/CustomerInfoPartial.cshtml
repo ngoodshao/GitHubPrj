@@ -1,0 +1,145 @@
+﻿@model LSH.EF.CodeFirst.DLL.Model.M_CustomerInfo
+
+
+<script>
+    function closeW() {
+        var dialog = frameElement.dialog; //调用页面的dialog对象(ligerui对象)
+        dialog.close();
+    }
+    function TClose() {
+        var succ = "@ViewBag.Succ";
+        var msg = "@ViewBag.Msg";
+        if (msg != "") {
+            if (succ == "1") {
+                $.ligerDialog.alert(msg, '提示', "success", function () {
+                    window.parent.document.location.reload();
+                    closeW();
+                });
+            }
+            else {
+                $.ligerDialog.alert(msg, '提示', "error");
+            }
+        }
+    }
+    TClose();
+
+    function itemclick(item) {
+        if (item.ActionName == "Close") {
+            closeW();
+        }
+        if (item.ActionName == "Save") {
+            $('#form1').submit();
+        }
+    }
+    $(function () {
+        $("#toptoolbar").ligerToolBar({
+            items: [
+                {
+                    text: '保存', click: itemclick, icon: 'save', ActionName: 'Save'
+                },
+                { line: true },
+                { text: '关闭', click: itemclick, icon: 'close', ActionName: 'Close' },
+            ]
+        });
+        $("#BornDate").attr("type", "date");
+    });
+</script>
+<style>
+    input, select {
+        padding-left: 3px;
+        margin-bottom: 5px;
+        min-height: 30px;
+        width: 86%;
+    }
+</style>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div id="toptoolbar"></div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.CusCode, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.CusCode)
+                @Html.HiddenFor(model => model.CusCode)
+                @Html.ValidationMessageFor(model => model.CusCode)
+            </div>
+
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.CusName, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.CusName)
+                @Html.ValidationMessageFor(model => model.CusName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.Gender, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.DropDownListFor(model => model.Gender, new[] {
+               new SelectListItem(){ Text="女", Value="0"},
+               new SelectListItem(){ Text="男", Value="1"}}, "请选择")
+                @Html.ValidationMessageFor(model => model.Gender)
+                @Html.ValidationMessageFor(model => model.Gender)
+            </div>
+
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.BornDate, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.BornDate, "", new { type = "date" })
+                @Html.ValidationMessageFor(model => model.BornDate)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.ContactNO, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.ContactNO)
+                @Html.ValidationMessageFor(model => model.ContactNO)
+            </div>
+
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.Address, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.IDCard, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.IDCard)
+                @Html.ValidationMessageFor(model => model.IDCard)
+            </div>
+
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.EmergencyLink, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.EmergencyLink)
+                @Html.ValidationMessageFor(model => model.EmergencyLink)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2 text-right">
+                @Html.LabelFor(model => model.Remark, new { @class = " control-label" })
+            </div>
+            <div class="col-xs-4">
+                @Html.TextAreaFor(model => model.Remark)
+                @Html.ValidationMessageFor(model => model.Remark)
+            </div>
+        </div>
+    </div>
+
