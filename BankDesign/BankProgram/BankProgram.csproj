@@ -689,7 +689,9 @@
     <Content Include="SelfJSorCSS\css\ligerui_self_tab.css" />
     <Content Include="SelfJSorCSS\js\CommFunJS.js" />
     <Content Include="SelfJSorCSS\js\Self_Grid.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
